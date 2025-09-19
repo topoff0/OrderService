@@ -1,0 +1,5 @@
+
+Todo:
+    ☐ Create and configure docker-compose @started(25-09-19 20:23)
+    ☐ Create controller with API POST (create order) method
+    ☐ Log the POST method through Kafka
