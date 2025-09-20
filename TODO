@@ -1,5 +1,7 @@
 
 Todo:
-    ☐ Create and configure docker-compose @started(25-09-19 20:23)
-    ☐ Create controller with API POST (create order) method
+    ✔ Create and configure docker-compose @started(25-09-19 20:23) @today @done(25-09-20 15:44) @lasted(19h21m49s)
+    ☐ Create controller with API POST `create order` method
     ☐ Log the POST method through Kafka
+Todo Long Term:
+    ☐ Switch Kafka + Zookeeper to KRaft
