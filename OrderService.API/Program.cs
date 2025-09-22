@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using OrderService.Infrastructure.Extensions.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +12,12 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.Services.AddPostgresDbContext();
 builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -25,6 +27,8 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty;
     });
 }
+
+await DatabaseExtension.ApplyMigrationsAsync(app.Services);
 
 app.Run();
 

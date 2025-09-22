@@ -1,13 +1,13 @@
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.DependencyInjection;
+using OrderService.Infrastructure.Data;
 
-namespace OrderService.Infrastructure.Data
+namespace OrderService.Infrastructure.Extensions.Database
 {
-    // Class to run ef migrations commands in terminal
-    public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
+    public static class DatabaseExtension
     {
-        public ApplicationDbContext CreateDbContext(string[] args)
+        public static IServiceCollection AddPostgresDbContext(this IServiceCollection services)
         {
             var envPath = Path.Combine(AppContext.BaseDirectory, "../../../..", ".env");
 
@@ -23,10 +23,20 @@ namespace OrderService.Infrastructure.Data
             string connectionString
                 = $"Host={host};Port={port};Username={user};Password={password};Database={database};";
 
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseNpgsql(connectionString);
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseNpgsql(connectionString);
+            });
 
-            return new ApplicationDbContext(optionsBuilder.Options);
+            return services;
+        }
+
+        public static async Task ApplyMigrationsAsync(IServiceProvider serviceProvider)
+        {
+            using var scope = serviceProvider.CreateScope();
+
+            var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            await db.Database.MigrateAsync();
         }
     }
 }
