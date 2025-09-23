@@ -1,5 +1,4 @@
-
-namespace OrderService.Core.Dtos
+namespace OrderService.Core.Dtos.Order
 {
     public class OrderCreateEventDto
     {
