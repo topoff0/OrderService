@@ -39,6 +39,12 @@ namespace OrderService.Infrastructure.Data
                 .IsRequired();
 
             // Customer
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(c => c.Orders)
+                .WithOne(o => o.Customer)
+                .HasForeignKey(o => o.CustomerId);
+
             modelBuilder.Entity<Customer>()
                 .Property(c => c.Email)
                 .IsRequired();
