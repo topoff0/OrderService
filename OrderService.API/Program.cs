@@ -1,4 +1,5 @@
 using OrderService.API.Extensions;
+using OrderService.API.Extensions.UseMiddlewares;
 using OrderService.Core.Interfaces.Repositories;
 using OrderService.Infrastructure.Extensions.Database;
 using OrderService.Infrastructure.Repositories;
@@ -21,6 +22,8 @@ builder.Services.AddControllers();
 
 // ======== Build ========
 var app = builder.Build();
+
+app.UseCustomExceptionMiddleware();
 
 app.UseOrderServiceSwagger(app.Environment);
 
