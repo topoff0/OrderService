@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using OrderService.Core.Dtos.Customer;
+using OrderService.Core.Dtos.CustomerDtos;
 
 namespace OrderService.API.Controllers
 {

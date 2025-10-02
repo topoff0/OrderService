@@ -1,11 +1,10 @@
-
-using OrderService.Core.Dtos.Customer;
 using OrderService.Infrastructure.Data;
 using OrderService.Core.Entities;
-using OrderService.Core.Interfaces.Repositories.CustomerRepo;
 using Microsoft.EntityFrameworkCore;
+using OrderService.Core.Interfaces.Repositories;
+using OrderService.Core.Dtos.CustomerDtos;
 
-namespace OrderService.Infrastructure.Repositories.CustomerRepo
+namespace OrderService.Infrastructure.Repositories
 {
     public class CustomerRepository(ApplicationDbContext db) : ICustomerRepository
     {

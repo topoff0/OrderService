@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using OrderService.Core.Dtos.Order;
+using OrderService.Core.Dtos.OrderDtos;
 
 namespace OrderService.API.Controllers
 {
@@ -8,7 +8,7 @@ namespace OrderService.API.Controllers
     public class OrderController : ControllerBase
     {
         [HttpPost("create")]
-        public async Task<IActionResult> CreateOrder(CreateOrderDto createOrderDto)
+        public async Task<IActionResult> CreateOrder(OrderDto createOrderDto)
         {
             return Ok();
         }

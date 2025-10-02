@@ -1,7 +1,7 @@
-using OrderService.Core.Dtos.Customer;
+using OrderService.Core.Dtos.CustomerDtos;
 using OrderService.Core.Entities;
 
-namespace OrderService.Core.Interfaces.Repositories.CustomerRepo
+namespace OrderService.Core.Interfaces.Repositories
 {
     public interface ICustomerRepository
     {

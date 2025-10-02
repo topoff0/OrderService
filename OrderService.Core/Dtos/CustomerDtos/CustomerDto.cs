@@ -1,5 +1,4 @@
-
-namespace OrderService.Core.Dtos.Customer
+namespace OrderService.Core.Dtos.CustomerDtos
 {
     public record CustomerDto(string Name, string Email);
 }
