@@ -10,9 +10,11 @@ namespace OrderService.Infrastructure.Repositories
     {
         private readonly ApplicationDbContext _db = db;
 
-        public async Task AddAsync(CustomerDto customerDto)
+        public async Task AddAsync(CustomerDto customerDto, CancellationToken cToken)
         {
-            await _db.AddAsync(new Customer(customerDto.Name, customerDto.Email));
+            await _db.AddAsync(
+                new Customer(customerDto.Name, customerDto.Email)
+                , cancellationToken: cToken);
         }
 
         public void Delete(Customer customer)
@@ -25,20 +27,23 @@ namespace OrderService.Infrastructure.Repositories
             _db.Update(customer);
         }
 
-        public async Task<Customer?> GetByEmailAsync(string email)
-        {
-            return await _db.Customers.Include(c => c.Orders).FirstOrDefaultAsync(c => c.Email == email);
-        }
-
-        public async Task<Customer?> GetByIdAsync(Guid customerId)
+        public async Task<Customer?> GetByEmailAsync(string email, CancellationToken cToken)
         {
             return await _db.Customers
-                .Include(c => c.Orders).FirstOrDefaultAsync(c => c.Id == customerId);
+                .Include(c => c.Orders)
+                .FirstOrDefaultAsync(c => c.Email == email, cancellationToken: cToken);
         }
 
-        public async Task SaveChangesAsync()
+        public async Task<Customer?> GetByIdAsync(Guid customerId, CancellationToken cToken)
         {
-            await _db.SaveChangesAsync();
+            return await _db.Customers
+                .Include(c => c.Orders)
+                .FirstOrDefaultAsync(c => c.Id == customerId, cancellationToken: cToken);
+        }
+
+        public async Task SaveChangesAsync(CancellationToken cToken)
+        {
+            await _db.SaveChangesAsync(cancellationToken: cToken);
         }
 
     }

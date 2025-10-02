@@ -10,9 +10,9 @@ namespace OrderService.Infrastructure.Repositories
     {
         private readonly ApplicationDbContext _db = db;
 
-        public async Task AddAsync(OrderDto orderDto)
+        public async Task AddAsync(OrderDto orderDto, CancellationToken cToken)
         {
-            await _db.AddAsync(new Order(orderDto));
+            await _db.AddAsync(new Order(orderDto), cancellationToken: cToken);
         }
 
         public void Update(Order order)
@@ -25,16 +25,17 @@ namespace OrderService.Infrastructure.Repositories
             _db.Remove(order);
         }
 
-        public async Task<Order?> GetByIdAsync(Guid id)
+        public async Task<Order?> GetByIdAsync(Guid id, CancellationToken cToken)
         {
             return await _db.Orders
                 .Include(o => o.Customer)
-                .Include(o => o.OrderItems).FirstOrDefaultAsync(o => o.Id == id);
+                .Include(o => o.OrderItems)
+                .FirstOrDefaultAsync(o => o.Id == id, cancellationToken: cToken);
         }
 
-        public async Task SaveChangesAsync()
+        public async Task SaveChangesAsync(CancellationToken cToken)
         {
-            await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync(cancellationToken: cToken);
         }
 
     }

@@ -5,12 +5,11 @@ namespace OrderService.Core.Interfaces.Repositories
 {
     public interface ICustomerRepository
     {
-        Task AddAsync(CustomerDto customerDto);
+        Task AddAsync(CustomerDto customerDto, CancellationToken cToken);
         void Update(Customer customer);
         void Delete(Customer customer);
-        Task<Customer?> GetByIdAsync(Guid customerId);
-        Task<Customer?> GetByEmailAsync(string email);
-
-        Task SaveChangesAsync();
+        Task<Customer?> GetByIdAsync(Guid customerId, CancellationToken cToken);
+        Task<Customer?> GetByEmailAsync(string email, CancellationToken cToken);
+        Task SaveChangesAsync(CancellationToken cToken);
     }
 }
