@@ -7,10 +7,10 @@ namespace OrderService.API.Controllers
     [Route("api/orders")]
     public class OrderController : ControllerBase
     {
-        [HttpPost("create")]
-        public async Task<IActionResult> CreateOrder(OrderDto createOrderDto)
-        {
-            return Ok();
-        }
+        // [HttpPost("create")]
+        // public async Task<IActionResult> CreateOrder(OrderDto createOrderDto)
+        // {
+        //     return Ok();
+        // }
     }
 }

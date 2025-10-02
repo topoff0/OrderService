@@ -1,34 +1,29 @@
-using Microsoft.OpenApi.Models;
+using OrderService.API.Extensions;
+using OrderService.Core.Interfaces.Repositories;
 using OrderService.Infrastructure.Extensions.Database;
+using OrderService.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "Order Service API",
-        Version = "v1"
-    });
-});
+// Swagger
+builder.Services.AddOrderServiceSwagger();
 
+// Services
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+
+// Database
 builder.Services.AddPostgresDbContext();
+
+// Controllers
 builder.Services.AddControllers();
 
+
+// Build
 var app = builder.Build();
 
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Order API v1");
-        c.RoutePrefix = string.Empty;
-    });
-}
+app.UseOrderServiceSwagger(app.Environment);
 
 await DatabaseExtension.ApplyMigrationsAsync(app.Services);
 
 app.Run();
-
