@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using OrderService.Core.Dtos.OrderDtos;
+using OrderService.Core.Dtos;
 using OrderService.Core.Interfaces.Services;
 
 namespace OrderService.API.Controllers
@@ -15,7 +15,7 @@ namespace OrderService.API.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> CreateOrder
                     (
-                        [FromBody] OrderDto createOrderDto,
+                        [FromBody] CreateDtos.CreateOrderDto createOrderDto,
                         CancellationToken cToken
                     )
         {

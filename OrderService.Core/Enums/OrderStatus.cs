@@ -4,7 +4,7 @@ namespace OrderService.Core.Enums
     {
         Created,
         Processing,
-        Completed,
+        Processed,
         Failed
     }
 }

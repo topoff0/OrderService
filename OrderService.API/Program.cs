@@ -4,7 +4,8 @@ using OrderService.Core.Interfaces.Repositories;
 using OrderService.Core.Interfaces.Services;
 using OrderService.Infrastructure.Extensions.Database;
 using OrderService.Infrastructure.Repositories;
-using OrderService.Services.CustomerService;
+using OrderService.Services.WithCustomer;
+using OrderService.Services.WithOrder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,8 @@ builder.Services.AddOrderServiceSwagger();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
-builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<ICustomerService, CustomerModule>();
+builder.Services.AddScoped<IOrderService, OrderModule>();
 
 // Database
 builder.Services.AddPostgresDbContext();
@@ -32,5 +34,7 @@ app.UseCustomExceptionMiddleware();
 app.UseOrderServiceSwagger(app.Environment);
 
 await DatabaseExtension.ApplyMigrationsAsync(app.Services);
+
+app.MapControllers();
 
 app.Run();

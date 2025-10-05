@@ -2,7 +2,7 @@ using OrderService.Infrastructure.Data;
 using OrderService.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using OrderService.Core.Interfaces.Repositories;
-using OrderService.Core.Dtos.CustomerDtos;
+using OrderService.Core.Dtos;
 
 namespace OrderService.Infrastructure.Repositories
 {
@@ -10,11 +10,9 @@ namespace OrderService.Infrastructure.Repositories
     {
         private readonly ApplicationDbContext _db = db;
 
-        public async Task AddAsync(CustomerDto customerDto, CancellationToken cToken)
+        public async Task AddAsync(CreateDtos.CreateCustomerDto customerDto, CancellationToken cToken)
         {
-            await _db.AddAsync(
-                new Customer(customerDto.Name, customerDto.Email)
-                , cancellationToken: cToken);
+            await _db.AddAsync(new Customer(customerDto), cancellationToken: cToken);
         }
 
         public void Delete(Customer customer)

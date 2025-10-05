@@ -20,6 +20,11 @@ Todo:
         ☐ Log the POST method through Kafka
 Development:
     ☐ Add CI @started(25-10-02 20:15)
+
+Docker:
+    ✔ Add Dockerfile for OrderService.API and register it in docker compose @started(25-10-05 18:02) @done(25-10-05 19:52) @lasted(1h50m46s)
+
 Todo Long Term:
     ☐ Switch Kafka + Zookeeper to KRaft
     ☐ Add fluent validation
+

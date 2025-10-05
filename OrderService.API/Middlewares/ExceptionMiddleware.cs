@@ -21,7 +21,7 @@ namespace OrderService.API.Middlewares
                 _logger.LogError($"RecordNotFoundException: ${ex.Message}");
                 await WriteErrorAsync(
                     context,
-                    HttpStatusCode.NotFound,
+                    HttpStatusCode.BadRequest,
                     "Not found",
                     "Sorry, we couldn't find data");
             }

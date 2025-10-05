@@ -1,33 +1,71 @@
 
-using OrderService.Core.Dtos.OrderDtos;
+using System.Diagnostics;
+using OrderService.Core.Dtos;
 using OrderService.Core.Enums;
 
 namespace OrderService.Core.Entities
 {
     public class Order
     {
-        public Order(OrderDto dto)
+        public Order(CreateDtos.CreateOrderDto dto)
         {
-            CustomerId = dto.Customer.Id;
-            Customer = dto.Customer;
-            TotalAmount = dto.TotalAmount;
-            OrderItems = dto.OrderItems;
-
+            CustomerId = dto.CustomerDto.Id;
+            Customer = new Customer
+            (
+                new CreateDtos.CreateCustomerDto
+                (
+                    dto.CustomerDto.Name, dto.CustomerDto.Email
+                )
+            );
             CreatedAt = DateTime.UtcNow;
             Status = OrderStatus.Created;
+            OrderItems = dto.OrderItemDtos.Select(oid => new OrderItem
+            (
+                new CreateDtos.CreateOrderItemDto
+                (
+                    oid.ProductName, oid.UnitPrice, oid.Quantity
+                )
+            )).ToList();
+
+            TotalAmount = OrderItems.Sum(oi => oi.TotalPrice);
         }
 
         private Order() { }
 
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
 
-        public Guid CustomerId { get; set; }
-        public Customer Customer { get; set; } = default!;
+        public Guid CustomerId { get; private set; }
+        public Customer Customer { get; private set; } = default!;
 
-        public DateTime CreatedAt { get; set; }
-        public DateTime? ProcessedAt { get; set; } = null!;
-        public OrderStatus Status { get; set; }
-        public decimal TotalAmount { get; set; }
-        public List<OrderItem> OrderItems { get; set; } = [];
+        public DateTime CreatedAt { get; private set; }
+        public DateTime? ProcessedAt { get; private set; } = null!;
+        public OrderStatus Status { get; private set; }
+        public List<OrderItem> OrderItems { get; private set; } = [];
+        public decimal TotalAmount { get; private set; }
+
+        public void AddItem(OrderItem item)
+        {
+            OrderItems.Add(item);
+            TotalAmount += item.TotalPrice;
+        }
+
+        public void MarkProcessing()
+        {
+            Status = OrderStatus.Processed;
+        }
+
+        public void MarkProcessed()
+        {
+            Status = OrderStatus.Processed;
+            ProcessedAt = DateTime.UtcNow;
+        }
+
+        public void RemoveItem(OrderItem item)
+        {
+            if (OrderItems.Remove(item))
+            {
+                TotalAmount -= item.TotalPrice;
+            }
+        }
     }
 }

@@ -1,12 +1,14 @@
 
+using OrderService.Core.Dtos;
+
 namespace OrderService.Core.Entities
 {
     public class Customer
     {
-        public Customer(string name, string email)
+        public Customer(CreateDtos.CreateCustomerDto dto)
         {
-            Name = name;
-            Email = email;
+            Name = dto.Name;
+            Email = dto.Email;
         }
 
         private Customer() { }

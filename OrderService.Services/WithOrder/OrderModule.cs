@@ -1,16 +1,16 @@
-using OrderService.Core.Dtos.OrderDtos;
+using OrderService.Core.Dtos;
 using OrderService.Core.Entities;
 using OrderService.Core.Exceptions;
 using OrderService.Core.Interfaces.Repositories;
 using OrderService.Core.Interfaces.Services;
 
-namespace OrderService.Services.OrderService
+namespace OrderService.Services.WithOrder
 {
-    public class OrderService(IOrderRepository orderRepository) : IOrderService
+    public class OrderModule(IOrderRepository orderRepository) : IOrderService
     {
         private readonly IOrderRepository _orderRepository = orderRepository;
 
-        public async Task AddAsync(OrderDto orderDto, CancellationToken cToken)
+        public async Task AddAsync(CreateDtos.CreateOrderDto orderDto, CancellationToken cToken)
         {
             await _orderRepository.AddAsync(orderDto, cToken);
             await _orderRepository.SaveChangesAsync(cToken);

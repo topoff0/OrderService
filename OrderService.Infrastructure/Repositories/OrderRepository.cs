@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using OrderService.Core.Dtos.OrderDtos;
+using OrderService.Core.Dtos;
 using OrderService.Core.Entities;
 using OrderService.Core.Interfaces.Repositories;
 using OrderService.Infrastructure.Data;
@@ -10,7 +10,7 @@ namespace OrderService.Infrastructure.Repositories
     {
         private readonly ApplicationDbContext _db = db;
 
-        public async Task AddAsync(OrderDto orderDto, CancellationToken cToken)
+        public async Task AddAsync(CreateDtos.CreateOrderDto orderDto, CancellationToken cToken)
         {
             await _db.AddAsync(new Order(orderDto), cancellationToken: cToken);
         }

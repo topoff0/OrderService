@@ -69,6 +69,24 @@ services:
       timeout: 5s
       retries: 5
 
+  api:
+    container_name: order_api
+    build:
+      context: .
+      dockerfile: OrderService.API/Dockerfile
+    env_file:
+      - ./.env
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - '8081:8081'
+    depends_on:
+      - postgres
+      - redis
+      - zookeeper
+      - kafka
+      - kafka_ui
+
 volumes:
   zookeeper_data:
   kafka_data:
