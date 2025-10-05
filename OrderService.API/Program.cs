@@ -1,8 +1,10 @@
 using OrderService.API.Extensions;
 using OrderService.API.Extensions.UseMiddlewares;
 using OrderService.Core.Interfaces.Repositories;
+using OrderService.Core.Interfaces.Services;
 using OrderService.Infrastructure.Extensions.Database;
 using OrderService.Infrastructure.Repositories;
+using OrderService.Services.CustomerService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOrderServiceSwagger();
 
 // Services
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 // Database
 builder.Services.AddPostgresDbContext();

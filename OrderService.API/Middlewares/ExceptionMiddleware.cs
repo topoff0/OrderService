@@ -1,6 +1,7 @@
 
 using System.Net;
 using System.Text.Json;
+using OrderService.Core.Exceptions;
 
 namespace OrderService.API.Middlewares
 {
@@ -15,9 +16,9 @@ namespace OrderService.API.Middlewares
             {
                 await _next(context);
             }
-            catch (KeyNotFoundException ex)
+            catch (RecordNotFoundException ex)
             {
-                _logger.LogError($"KeyNotFoundException: ${ex.Message}");
+                _logger.LogError($"RecordNotFoundException: ${ex.Message}");
                 await WriteErrorAsync(
                     context,
                     HttpStatusCode.NotFound,
@@ -26,7 +27,7 @@ namespace OrderService.API.Middlewares
             }
             catch (Exception ex)
             {
-                _logger.LogCritical($"Exception: ${ex.Message}");
+                _logger.LogCritical($"UnknownException: {ex.Message}\n\n StackTrace: {ex.StackTrace}");
                 await WriteErrorAsync(
                     context,
                     HttpStatusCode.InternalServerError,
