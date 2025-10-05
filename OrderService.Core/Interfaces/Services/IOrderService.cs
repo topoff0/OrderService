@@ -1,13 +1,13 @@
 using OrderService.Core.Dtos.OrderDtos;
 using OrderService.Core.Entities;
 
-namespace OrderService.Core.Interfaces.Repositories
+namespace OrderService.Core.Interfaces.Services
 {
-    public interface IOrderRepository
+    public interface IOrderService
     {
         Task AddAsync(OrderDto orderDto, CancellationToken cToken);
-        void Update(Order order);
-        void Delete(Order order);
+        Task UpdateAsync(Order order, CancellationToken cToken);
+        Task DeleteAsync(Order order, CancellationToken cToken);
         Task<Order?> GetByIdAsync(Guid id, CancellationToken cToken);
         Task SaveChangesAsync(CancellationToken cToken);
     }

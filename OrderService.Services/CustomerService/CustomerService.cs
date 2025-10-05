@@ -17,6 +17,12 @@ namespace OrderService.Services.CustomerService
             await _customerRepo.SaveChangesAsync(cToken);
         }
 
+        public async Task UpdateAsync(Customer customer, CancellationToken cToken)
+        {
+            _customerRepo.Update(customer);
+            await _customerRepo.SaveChangesAsync(cToken);
+        }
+
         public async Task DeleteAsync(Customer customer, CancellationToken cToken)
         {
             _customerRepo.Delete(customer);
@@ -27,7 +33,7 @@ namespace OrderService.Services.CustomerService
         {
             var customer = await _customerRepo.GetByEmailAsync(email, cToken);
             if (customer is null)
-                throw new RecordNotFoundException("Customer with this email not found");
+                throw new RecordNotFoundException($"Customer with email:{{{email}}} not found");
             return customer;
         }
 
@@ -35,14 +41,9 @@ namespace OrderService.Services.CustomerService
         {
             var customer = await _customerRepo.GetByIdAsync(customerId, cToken);
             if (customer is null)
-                throw new RecordNotFoundException("Customer with this Id not found");
+                throw new RecordNotFoundException($"Customer with id:{{{customerId}}} not found");
             return customer;
         }
 
-        public async Task UpdateAsync(Customer customer, CancellationToken cToken)
-        {
-            _customerRepo.Update(customer);
-            await _customerRepo.SaveChangesAsync(cToken);
-        }
     }
 }
