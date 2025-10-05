@@ -1,16 +1,30 @@
 using Microsoft.AspNetCore.Mvc;
 using OrderService.Core.Dtos.CustomerDtos;
+using OrderService.Core.Interfaces.Services;
 
 namespace OrderService.API.Controllers
 {
     [ApiController]
     [Route("api/customers")]
-    public class CustomerController : ControllerBase
+    public class CustomerController
+                (
+                    ICustomerService customerService
+                )
+                : ControllerBase
     {
-        // [HttpPost("create")]
-        // public async Task<IActionResult> CreateCustomer([FromBody] CustomerDto customerDto)
-        // {
-        //     return Ok();
-        // }
+        // Dependencies
+        private readonly ICustomerService _customerService = customerService;
+
+        // Endpoints
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateCustomer
+                    (
+                        [FromBody] CustomerDto customerDto,
+                        CancellationToken cToken
+                    )
+        {
+            await _customerService.AddAsync(customerDto, cToken);
+            return Ok();
+        }
     }
 }

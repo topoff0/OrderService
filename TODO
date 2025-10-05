@@ -1,7 +1,7 @@
 
 Todo:
     ✔ Create and configure docker-compose @started(25-09-19 20:23) @today @done(25-09-20 15:44) @lasted(19h21m49s)
-    ☐ Create controller with API POST `create order` method @started(25-10-02 20:15)
+    ✔ Create controller with API POST `create order` method @started(25-10-02 20:15) @done(25-10-05 17:48) @lasted(2d21h33m2s)
     Todo for creating API POST `create order`:
         ✔ Create entities @started(25-09-20 21:08) @done(25-09-21 16:02) @lasted(18h54m38s)
         ✔ Create dbContext @started(25-09-21 16:02) @done(25-09-21 21:59) @lasted(5h57m45s)
