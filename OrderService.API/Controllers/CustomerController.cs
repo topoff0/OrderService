@@ -19,7 +19,7 @@ namespace OrderService.API.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> CreateCustomer
                     (
-                        [FromBody] CreateDtos.CreateCustomerDto customerDto,
+                        [FromBody] CreateDto.CreateCustomerDto customerDto,
                         CancellationToken cToken
                     )
         {

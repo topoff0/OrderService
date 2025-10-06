@@ -10,7 +10,7 @@ namespace OrderService.Services.WithOrder
     {
         private readonly IOrderRepository _orderRepository = orderRepository;
 
-        public async Task AddAsync(CreateDtos.CreateOrderDto orderDto, CancellationToken cToken)
+        public async Task AddAsync(CreateDto.CreateOrderDto orderDto, CancellationToken cToken)
         {
             await _orderRepository.AddAsync(orderDto, cToken);
             await _orderRepository.SaveChangesAsync(cToken);

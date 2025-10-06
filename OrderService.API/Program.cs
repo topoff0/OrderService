@@ -1,32 +1,40 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using OrderService.API.Extensions;
 using OrderService.API.Extensions.UseMiddlewares;
 using OrderService.Core.Interfaces.Repositories;
 using OrderService.Core.Interfaces.Services;
 using OrderService.Infrastructure.Extensions.Database;
 using OrderService.Infrastructure.Repositories;
+using OrderService.Services.Validators.CreateDtos;
 using OrderService.Services.WithCustomer;
 using OrderService.Services.WithOrder;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Swagger
+// ============ Swagger =============
 builder.Services.AddOrderServiceSwagger();
 
-// Services
+// ============ Services ============
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 builder.Services.AddScoped<ICustomerService, CustomerModule>();
 builder.Services.AddScoped<IOrderService, OrderModule>();
 
-// Database
+// ============ Fluent validation ============
+builder.Services.AddFluentValidationAutoValidation();
+// Add all validators (scan full assembly) ->
+builder.Services.AddValidatorsFromAssemblyContaining<CreateCustomerDtoValidator>();
+
+// ============ Database ===============
 builder.Services.AddPostgresDbContext();
 
-// Controllers
+// ============ Controllers ============
 builder.Services.AddControllers();
 
 
-// ======== Build ========
+// ============ Build ==================
 var app = builder.Build();
 
 app.UseCustomExceptionMiddleware();

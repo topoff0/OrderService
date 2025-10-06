@@ -2,7 +2,7 @@ using OrderService.Core.Enums;
 
 namespace OrderService.Core.Dtos
 {
-    public class CreateDtos
+    public class CreateDto
     {
         public record CreateCustomerDto(string Name, string Email);
 
@@ -15,10 +15,10 @@ namespace OrderService.Core.Dtos
 
         public record CreateOrderDto
         (
-            OutputDtos.CustomerDto CustomerDto,
+            OutputDto.CustomerDto CustomerDto,
             DateTime CreatedAt,
             OrderStatus Status,
-            List<OutputDtos.OrderItemDto> OrderItemDtos
+            List<OutputDto.OrderItemDto> OrderItemDtos
         );
     }
 }

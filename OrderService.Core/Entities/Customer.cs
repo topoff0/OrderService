@@ -5,7 +5,7 @@ namespace OrderService.Core.Entities
 {
     public class Customer
     {
-        public Customer(CreateDtos.CreateCustomerDto dto)
+        public Customer(CreateDto.CreateCustomerDto dto)
         {
             Name = dto.Name;
             Email = dto.Email;

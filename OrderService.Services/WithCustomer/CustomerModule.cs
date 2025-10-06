@@ -10,7 +10,7 @@ namespace OrderService.Services.WithCustomer
     {
         private readonly ICustomerRepository _customerRepo = customerRepo;
 
-        public async Task AddAsync(CreateDtos.CreateCustomerDto customerDto, CancellationToken cToken)
+        public async Task AddAsync(CreateDto.CreateCustomerDto customerDto, CancellationToken cToken)
         {
             await _customerRepo.AddAsync(customerDto, cToken);
             await _customerRepo.SaveChangesAsync(cToken);

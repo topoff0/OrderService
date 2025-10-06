@@ -10,7 +10,7 @@ namespace OrderService.Infrastructure.Repositories
     {
         private readonly ApplicationDbContext _db = db;
 
-        public async Task AddAsync(CreateDtos.CreateOrderDto orderDto, CancellationToken cToken)
+        public async Task AddAsync(CreateDto.CreateOrderDto orderDto, CancellationToken cToken)
         {
             await _db.AddAsync(new Order(orderDto), cancellationToken: cToken);
         }

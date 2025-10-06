@@ -2,7 +2,7 @@ using OrderService.Core.Enums;
 
 namespace OrderService.Core.Dtos
 {
-    public class OutputDtos
+    public class OutputDto
     {
         public record CustomerDto(Guid Id, string Name, string Email);
 

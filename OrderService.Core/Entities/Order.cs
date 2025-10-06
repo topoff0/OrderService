@@ -7,12 +7,12 @@ namespace OrderService.Core.Entities
 {
     public class Order
     {
-        public Order(CreateDtos.CreateOrderDto dto)
+        public Order(CreateDto.CreateOrderDto dto)
         {
             CustomerId = dto.CustomerDto.Id;
             Customer = new Customer
             (
-                new CreateDtos.CreateCustomerDto
+                new CreateDto.CreateCustomerDto
                 (
                     dto.CustomerDto.Name, dto.CustomerDto.Email
                 )
@@ -21,7 +21,7 @@ namespace OrderService.Core.Entities
             Status = OrderStatus.Created;
             OrderItems = dto.OrderItemDtos.Select(oid => new OrderItem
             (
-                new CreateDtos.CreateOrderItemDto
+                new CreateDto.CreateOrderItemDto
                 (
                     oid.ProductName, oid.UnitPrice, oid.Quantity
                 )

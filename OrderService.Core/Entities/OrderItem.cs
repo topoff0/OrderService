@@ -6,7 +6,7 @@ namespace OrderService.Core.Entities
     public class OrderItem
     {
 
-        public OrderItem(CreateDtos.CreateOrderItemDto dto)
+        public OrderItem(CreateDto.CreateOrderItemDto dto)
         {
             ProductName = dto.ProductName;
             UnitPrice = dto.UnitPrice;
