@@ -13,7 +13,7 @@ namespace OrderService.Infrastructure.Messaging
         {
             var config = new ProducerConfig
             {
-                BootstrapServers = "localhost:29092"
+                BootstrapServers = "kafka:9092"
             };
 
             _producer = new ProducerBuilder<string, string>(config).Build();

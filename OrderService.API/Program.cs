@@ -5,6 +5,7 @@ using OrderService.API.Extensions.UseMiddlewares;
 using OrderService.Core.Interfaces.Repositories;
 using OrderService.Core.Interfaces.Services;
 using OrderService.Infrastructure.Extensions.Database;
+using OrderService.Infrastructure.Extensions.Messaging;
 using OrderService.Infrastructure.Repositories;
 using OrderService.Services.Validators.CreateDtos;
 using OrderService.Services.WithCustomer;
@@ -26,6 +27,9 @@ builder.Services.AddScoped<IOrderService, OrderModule>();
 builder.Services.AddFluentValidationAutoValidation();
 // Add all validators (scan full assembly) ->
 builder.Services.AddValidatorsFromAssemblyContaining<CreateCustomerDtoValidator>();
+
+// ============ Kafka ==================
+builder.Services.AddKafka();
 
 // ============ Database ===============
 builder.Services.AddPostgresDbContext();
