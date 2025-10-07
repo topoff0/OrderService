@@ -18,6 +18,7 @@ Todo:
         ✘ Add logger to customer service @cancelled(25-10-05 17:40)
     Kafka:
         ☐ Log the POST method through Kafka
+        ☐ Update KafkaProducer config
 Development:
     ☐ Add CI @started(25-10-02 20:15)
 
