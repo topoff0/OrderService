@@ -16,9 +16,14 @@ Todo:
         ✔ Add exception middleware @started(25-10-02 20:11) @done(25-10-02 20:36) @lasted(25m28s)
         ✔ Add custom exception @started(25-10-03 16:42) @done(25-10-05 17:22) @lasted(2d40m11s)
         ✘ Add logger to customer service @cancelled(25-10-05 17:40)
-    Kafka:
-        ☐ Log the POST method through Kafka
-        ☐ Update KafkaProducer config
+
+Hotfixes:
+    ☐ Update repositories (must have a REAL object in accept values instead of DTO) @high
+    ☐ Update services (must have a return value) @high
+
+Kafka:
+    ✔ Log the POST method through Kafka @done(25-10-07 21:46)
+    ☐ Update KafkaProducer config
 Development:
     ☐ Add CI @started(25-10-02 20:15)
 
