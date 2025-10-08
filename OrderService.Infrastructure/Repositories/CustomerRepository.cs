@@ -10,9 +10,11 @@ namespace OrderService.Infrastructure.Repositories
     {
         private readonly ApplicationDbContext _db = db;
 
-        public async Task AddAsync(CreateDto.CreateCustomerDto customerDto, CancellationToken cToken)
+        public async Task<Customer> AddAsync(CreateDto.CreateCustomerDto customerDto, CancellationToken cToken)
         {
-            await _db.AddAsync(new Customer(customerDto), cancellationToken: cToken);
+            var customer = new Customer(customerDto);
+            await _db.AddAsync(customer, cancellationToken: cToken);
+            return customer;
         }
 
         public void Delete(Customer customer)

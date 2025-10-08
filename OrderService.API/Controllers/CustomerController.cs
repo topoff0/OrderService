@@ -23,7 +23,7 @@ namespace OrderService.API.Controllers
                         CancellationToken cToken
                     )
         {
-            await _customerService.AddAsync(customerDto, cToken);
+            var customer = await _customerService.AddAsync(customerDto, cToken);
             return Ok();
         }
     }

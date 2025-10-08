@@ -5,7 +5,7 @@ namespace OrderService.Core.Interfaces.Repositories
 {
     public interface IOrderRepository
     {
-        Task AddAsync(CreateDto.CreateOrderDto orderDto, CancellationToken cToken);
+        Task<Order> AddAsync(CreateDto.CreateOrderDto orderDto, CancellationToken cToken);
         void Update(Order order);
         void Delete(Order order);
         Task<Order?> GetByIdAsync(Guid id, CancellationToken cToken);
